@@ -1,0 +1,57 @@
+<mat-accordion *ngIf="chartInfo">
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>Additional Info:</mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+      <li>Date: {{ chartInfo.date | date: "dd/MM/yyyy" }}</li>
+      <li>Country: {{ chartInfo.country }}</li>
+      <li>Population: {{ chartInfo.population | number }}</li>
+    </ul>
+  </mat-expansion-panel>
+</mat-accordion>
+<ng-template #noData>
+  <mat-card>No available data at this moment</mat-card>
+</ng-template>
+<div *ngIf="allHistory?.length; else noData">
+  <div class="row">
+    <div class="col-md-12">
+      <div id="chart">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [labels]="chartOptions.labels"
+          [responsive]="chartOptions.responsive"
+          [tooltip]="chartOptions.tooltip"
+        ></apx-chart>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <google-chart
+        *ngIf="lineCompareChart?.dataTable?.length"
+        [data]="lineCompareChart"
+      ></google-chart>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <google-chart
+        *ngIf="areaCasesChart?.dataTable?.length"
+        [data]="areaCasesChart"
+      ></google-chart>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <google-chart
+        *ngIf="columnDeathsChart?.dataTable?.length"
+        [data]="columnDeathsChart"
+      ></google-chart>
+    </div>
+  </div>
+</div>

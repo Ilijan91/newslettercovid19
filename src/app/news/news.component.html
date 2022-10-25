@@ -1,0 +1,45 @@
+<div class="news">
+  <div style="margin: 10px auto; width: 350px">
+    <h4>Choose here source of news</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>News source:</mat-label>
+      <mat-select
+        (selectionChange)="selectNewsSource($event.value)"
+        [(value)]="selectedNewsSource"
+      >
+        <mat-option [value]="option.value" *ngFor="let option of newsSource">
+          {{ option.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-radio-group class="radioGroup" *ngIf="selectedNewsSource === 'news'">
+      <mat-radio-button
+        (change)="filterByPortal('All')"
+        class="radioBtn"
+        value="All"
+      >
+        All
+      </mat-radio-button>
+      <mat-radio-button
+        *ngFor="let portal of availablePortals"
+        class="radioBtn"
+        value="{{ portal.source }}"
+        (change)="filterByPortal(portal.source)"
+      >
+        {{ portal.source }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <hr />
+  <mat-card *ngFor="let news of allNewsArray" class="news-card">
+    <a href="{{ news.url }}">
+      <mat-card-title-group>
+        <mat-card-title>{{ news.title }}</mat-card-title>
+        <img mat-card-sm-image src="{{ news.icon }}" />
+      </mat-card-title-group>
+    </a>
+    <mat-card-content>
+      {{ news.source }}
+    </mat-card-content>
+  </mat-card>
+</div>

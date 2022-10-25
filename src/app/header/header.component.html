@@ -1,0 +1,17 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span style="cursor: pointer" [routerLink]="['/news']">
+    <mat-icon>local_hospital</mat-icon>
+    COVID19 newsletter
+  </span>
+  <div class="spacer"></div>
+  <a mat-button [routerLink]="['/news']" routerLinkActive="router-link-active">
+    News
+  </a>
+  <a
+    mat-button
+    [routerLink]="['/statistics']"
+    routerLinkActive="router-link-active"
+  >
+    Statistics
+  </a>
+</mat-toolbar>
